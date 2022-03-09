@@ -1,0 +1,25 @@
+port:5601 -> kibana 
+Dev Tools
+
+PUT /experts
+{
+  "mappings": {
+    "_doc": {
+      "properties":{
+        "user_id": {"type": "keyword"},
+        "name": {"type": "text"},
+        "organisation_name": {"type": "keyword"},
+        "citations": {"type": "integer"},
+        "expertise_names": {"type": "keyword"},
+        "coauthors": {
+          "properties": {
+            "user_id": {"type": "keyword"},
+            "name": {"type": "text"}
+          }
+        },
+        "h_index": {"type": "integer"},
+        "i10_index": {"type": "integer"}
+      }
+    }
+  }
+}
