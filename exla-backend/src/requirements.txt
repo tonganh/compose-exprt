@@ -1,0 +1,16 @@
+numpy
+pandas
+requests
+urllib3
+fastapi==0.61.1
+pydantic[email]
+python-decouple==3.3
+uvicorn==0.11.8
+python-jose==3.3.0
+async-generator
+pyyaml
+pymongo==3.11.0
+elasticsearch
+boto3
+botocore
+motor
