@@ -1,0 +1,13 @@
+version: "3.5"
+
+services:
+  backend:
+    image: "exla-backend:latest"
+    ports: 
+      - 8088:9091
+    volumes: 
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    env_file:
+      - ../exla-backend/.env
+    restart: unless-stopped

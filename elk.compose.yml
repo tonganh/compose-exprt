@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  elasticsearch:
+    build:
+      context: ./elk/config/elasticsearch
+      dockerfile: Dockerfile
+    environment:
+      ES_JAVA_OPTS: "-Xmx1g -Xms1g" 
+    volumes:
+      - ./elk/data/elasticsearch/data:/usr/share/elasticsearch/data
+      - ./elk/data/elasticsearch/backups:/usr/share/elasticsearch/backups
+      - ./elk/config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.0
+    volumes:
+      - ./elk/config/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+      - ./elk/data/kibana/log:/var/log:rw
+    ports:
+      - 5601:5601
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.5.0
+    volumes:
+      - ./elk/config/logstash/logstash.conf/:/usr/share/logstash/pipeline/logstash.conf
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m" 
+    depends_on:
+      - elasticsearch

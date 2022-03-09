@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  mongodb:
+    image: mongo:latest
+    restart: unless-stopped
+
+    environment:
+      TZ: Asia/Ho_Chi_Minh
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 98859B9980A218F6DAD192B74781E15D
+    ports:
+      - 27017:27017
+    volumes:
+      - /mnt/disk2/mongo-volume-fimi:/data/db
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
